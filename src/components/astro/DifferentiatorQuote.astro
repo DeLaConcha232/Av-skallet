@@ -1,0 +1,17 @@
+---
+import type { DiffDictionary } from "@/data/types";
+
+interface Props {
+  diff: DiffDictionary;
+}
+
+const { diff } = Astro.props;
+---
+
+<section class="texture-stripes-dark relative py-24 px-6 text-cream">
+  <div class="absolute inset-0 bg-ink/[0.88]"></div>
+  <div class="relative mx-auto max-w-2xl text-center">
+    <p class="mb-5 font-mono text-xs font-bold uppercase tracking-widest text-accent">{diff.label}</p>
+    <p class="text-[clamp(1.5rem,3.4vw,2.1rem)] font-bold leading-snug">{diff.quote}</p>
+  </div>
+</section>

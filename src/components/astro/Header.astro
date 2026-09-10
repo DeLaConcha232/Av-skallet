@@ -1,0 +1,68 @@
+---
+import type { Locale, NavDictionary } from "@/data/types";
+import { homePath } from "@/i18n/utils";
+import MobileNav from "@/components/react/MobileNav.tsx";
+import logoSvg from "@/assets/logo/avskallet-logo.svg?raw";
+
+interface Props {
+  locale: Locale;
+  nav: NavDictionary;
+}
+
+const { locale, nav } = Astro.props;
+const altLocale: Locale = locale === "es" ? "en" : "es";
+
+const navItems = [
+  { href: "#servicios", label: nav.servicios },
+  { href: "#proceso", label: nav.proceso },
+  { href: "#trabajo", label: nav.trabajo },
+  { href: "#planes", label: nav.planes },
+  { href: "#faq", label: nav.faq },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-border bg-cream/90 backdrop-blur-sm">
+  <div class="container relative flex h-16 items-center justify-between gap-4">
+    <a href={homePath[locale]} class="flex items-center text-ink" aria-label={`${nav.cta} — av-skallet`}>
+      <span class="h-6 w-auto [&>svg]:h-full" set:html={logoSvg} />
+    </a>
+
+    <nav class="hidden items-center gap-6 text-sm font-medium md:flex">
+      {navItems.map((item) => (
+        <a href={item.href} class="text-ink transition-colors hover:text-accent">
+          {item.label}
+        </a>
+      ))}
+
+      <div class="flex overflow-hidden rounded-sm border border-border-strong font-mono text-xs font-semibold">
+        <a
+          href={homePath.es}
+          aria-current={locale === "es" ? "page" : undefined}
+          class:list={["px-3 py-2", locale === "es" ? "bg-accent text-accent-ink" : "text-muted"]}
+        >
+          ES
+        </a>
+        <a
+          href={homePath.en}
+          aria-current={locale === "en" ? "page" : undefined}
+          class:list={["px-3 py-2", locale === "en" ? "bg-accent text-accent-ink" : "text-muted"]}
+        >
+          EN
+        </a>
+      </div>
+
+      <a href="#contacto" class="rounded-sm bg-ink px-5 py-2.5 font-semibold text-cream transition-colors hover:bg-ink-soft">
+        {nav.cta}
+      </a>
+    </nav>
+
+    <MobileNav
+      client:load
+      navItems={navItems}
+      ctaLabel={nav.cta}
+      ctaHref="#contacto"
+      altLocaleHref={homePath[altLocale]}
+      altLocaleLabel={altLocale.toUpperCase()}
+    />
+  </div>
+</header>

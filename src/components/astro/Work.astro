@@ -1,0 +1,110 @@
+---
+import type { WorkHeading, WorkItem } from "@/data/types";
+import { ExternalLink, Play } from "lucide-react";
+import { Image } from "astro:assets";
+
+interface Props {
+  work: WorkHeading;
+  items: WorkItem[];
+}
+
+const { work, items } = Astro.props;
+---
+
+<section id="trabajo" class="container py-16 md:py-20">
+  <div class="mb-10 flex flex-wrap items-baseline justify-between gap-5">
+    <div>
+      <div class="mb-4 h-1.5 w-9 bg-accent"></div>
+      <h2 class="text-[clamp(1.6rem,3.4vw,2.25rem)] font-extrabold tracking-tight text-ink">
+        {work.heading}
+      </h2>
+    </div>
+    <p class="max-w-sm text-sm text-muted">{work.sub}</p>
+  </div>
+
+  <div class="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4">
+    {items.map((item) => (
+      <div>
+        {item.video ? (
+          <div data-video-card class="group relative mb-4 cursor-pointer">
+            <video
+              class="aspect-[16/11] w-full rounded border border-border object-cover"
+              poster={item.image?.src}
+              src={item.video}
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            ></video>
+            <div
+              data-video-play-badge
+              class="pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+            >
+              <span class="flex h-12 w-12 items-center justify-center rounded-full bg-ink/70 text-cream">
+                <Play className="h-5 w-5 translate-x-0.5" fill="currentColor" />
+              </span>
+            </div>
+          </div>
+        ) : item.image ? (
+          <Image
+            src={item.image}
+            alt={item.title}
+            width={640}
+            height={440}
+            class="mb-4 aspect-[16/11] w-full rounded border border-border object-cover"
+          />
+        ) : (
+          <div class="texture-stripes mb-4 flex aspect-[16/11] items-center justify-center rounded border border-border p-4 text-center">
+            <span class="font-mono text-xs leading-relaxed text-muted">{item.imageCaption}</span>
+          </div>
+        )}
+        <div class="mb-1.5 font-mono text-xs font-bold text-accent">{item.tag}</div>
+        <h3 class="mb-1.5 text-[17px] font-bold text-ink">{item.title}</h3>
+        <p class="mb-2 text-sm leading-relaxed text-muted-dark">{item.desc}</p>
+        {item.liveUrl && (
+          <a
+            href={item.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline"
+          >
+            <ExternalLink className="h-3.5 w-3.5" />
+            {work.viewProject}
+          </a>
+        )}
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  const cards = document.querySelectorAll<HTMLElement>("[data-video-card]");
+  cards.forEach((card) => {
+    const video = card.querySelector("video");
+    if (!(video instanceof HTMLVideoElement)) return;
+    const badge = card.querySelector<HTMLElement>("[data-video-play-badge]");
+    const setBadgeVisible = (visible: boolean) => {
+      if (badge) badge.style.opacity = visible ? "1" : "0";
+    };
+
+    card.addEventListener("mouseenter", () => {
+      video.currentTime = 0;
+      video.play();
+      setBadgeVisible(false);
+    });
+    card.addEventListener("mouseleave", () => {
+      video.pause();
+      video.currentTime = 0;
+      setBadgeVisible(true);
+    });
+    card.addEventListener("click", () => {
+      if (video.paused) {
+        video.play();
+        setBadgeVisible(false);
+      } else {
+        video.pause();
+        setBadgeVisible(true);
+      }
+    });
+  });
+</script>

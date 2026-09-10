@@ -1,0 +1,51 @@
+---
+import type { PlansHeading, PlanItem } from "@/data/types";
+
+interface Props {
+  plans: PlansHeading;
+  items: PlanItem[];
+}
+
+const { plans, items } = Astro.props;
+---
+
+<section id="planes" class="container border-t border-border py-16 md:py-20">
+  <div class="mb-10 max-w-xl">
+    <div class="mb-4 h-1.5 w-9 bg-accent"></div>
+    <h2 class="mb-3.5 text-[clamp(1.6rem,3.4vw,2.25rem)] font-extrabold tracking-tight text-ink">
+      {plans.heading}
+    </h2>
+    <p class="text-[15px] text-muted">{plans.sub}</p>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {items.map((plan) => (
+      <div class="flex flex-col gap-4 rounded border border-border bg-[#fbfaf6] p-7">
+        <div>
+          <h3 class="mb-2 text-lg font-bold text-ink">{plan.title}</h3>
+          <p class="mb-4 text-sm text-muted">{plan.desc}</p>
+          {plan.price.type === "from" ? (
+            <div class="text-2xl font-extrabold text-ink">
+              <span class="text-sm font-semibold text-muted">{plans.fromLabel}</span> {plan.price.amount}
+            </div>
+          ) : (
+            <div class="text-lg font-bold text-accent">{plans.quoteLabel}</div>
+          )}
+        </div>
+        <ul class="flex flex-col gap-2.5">
+          {plan.features.map((feat) => (
+            <li class="flex gap-2.5 text-sm leading-relaxed text-ink-soft">
+              <span class="text-accent">—</span>{feat}
+            </li>
+          ))}
+        </ul>
+        <a
+          href="#contacto"
+          class="mt-auto rounded-sm border border-ink px-4 py-2.5 text-center text-sm font-semibold text-ink transition-colors hover:bg-ink hover:text-cream"
+        >
+          {plans.ctaLabel}
+        </a>
+      </div>
+    ))}
+  </div>
+</section>

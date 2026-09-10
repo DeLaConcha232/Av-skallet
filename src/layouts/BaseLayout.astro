@@ -1,0 +1,61 @@
+---
+import "@/styles/global.css";
+import type { Locale, Dictionary } from "@/data/types";
+import { getAlternateUrls } from "@/i18n/utils";
+import { site } from "@/data/site";
+
+interface Props {
+  locale: Locale;
+  dictionary: Dictionary;
+}
+
+const { locale, dictionary } = Astro.props;
+const alternates = getAlternateUrls(site.url);
+const canonical = locale === "es" ? alternates.es : alternates.en;
+const ogLocale = locale === "es" ? "es_MX" : "en_US";
+const ogLocaleAlt = locale === "es" ? "en_US" : "es_MX";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: site.name,
+  url: canonical,
+  email: site.email,
+  telephone: site.phone,
+  description: dictionary.meta.description,
+  areaServed: "MX",
+  priceRange: "$$",
+};
+---
+
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{dictionary.meta.title}</title>
+    <meta name="description" content={dictionary.meta.description} />
+    <meta name="author" content={site.name} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="es" href={alternates.es} />
+    <link rel="alternate" hreflang="en" href={alternates.en} />
+    <link rel="alternate" hreflang="x-default" href={alternates["x-default"]} />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={dictionary.meta.title} />
+    <meta property="og:description" content={dictionary.meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlt} />
+    <meta property="og:site_name" content={site.name} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={dictionary.meta.title} />
+    <meta name="twitter:description" content={dictionary.meta.description} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

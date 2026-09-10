@@ -1,0 +1,66 @@
+@import "@fontsource/public-sans/400.css";
+@import "@fontsource/public-sans/500.css";
+@import "@fontsource/public-sans/600.css";
+@import "@fontsource/public-sans/700.css";
+@import "@fontsource/public-sans/800.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Default accent: sage green. Swap this one value to re-theme the whole site
+     (alternatives from the design reference: terracotta #c98a4b, brick #b5533c, mint #8ed9a5). */
+  --accent: #7a8f78;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: inherit;
+  }
+}
+
+@layer utilities {
+  .texture-stripes {
+    background-image: repeating-linear-gradient(
+      135deg,
+      #ece8dd 0px,
+      #ece8dd 14px,
+      #e2ddd0 14px,
+      #e2ddd0 28px
+    );
+  }
+
+  .texture-stripes-dark {
+    background-image: repeating-linear-gradient(
+      135deg,
+      #3c3b34 0px,
+      #3c3b34 16px,
+      #2f2e28 16px,
+      #2f2e28 32px
+    );
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}

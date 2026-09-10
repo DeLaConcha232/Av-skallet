@@ -1,0 +1,42 @@
+---
+import type { HeroDictionary } from "@/data/types";
+import { Image } from "astro:assets";
+import heroBg from "@/assets/hero-bg.jpg";
+
+interface Props {
+  hero: HeroDictionary;
+}
+
+const { hero } = Astro.props;
+---
+
+<section class="relative overflow-hidden">
+  <Image
+    src={heroBg}
+    alt=""
+    width={1920}
+    height={1080}
+    class="absolute inset-0 h-full w-full object-cover"
+  />
+  <div class="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/45 to-transparent"></div>
+
+  <div class="container relative py-20 md:py-28">
+    <p class="mb-4 font-mono text-xs font-bold uppercase tracking-widest text-accent">
+      {hero.kicker}
+    </p>
+    <h1 class="mb-6 max-w-2xl text-[clamp(2.5rem,7vw,5rem)] font-extrabold leading-[1.05] tracking-tight text-cream">
+      {hero.headline}
+    </h1>
+    <p class="mb-8 max-w-lg text-lg leading-relaxed text-muted-light">
+      {hero.sub}
+    </p>
+    <div class="flex flex-wrap gap-3.5">
+      <a href="#contacto" class="rounded-sm bg-cream px-7 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-white">
+        {hero.cta1}
+      </a>
+      <a href="#proceso" class="rounded-sm border border-cream/40 px-7 py-3.5 text-sm font-semibold text-cream transition-colors hover:border-cream hover:bg-cream/10">
+        {hero.cta2}
+      </a>
+    </div>
+  </div>
+</section>

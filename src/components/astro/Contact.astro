@@ -1,0 +1,87 @@
+---
+import type { ContactDictionary, Locale } from "@/data/types";
+import { whatsappHref } from "@/data/site";
+
+interface Props {
+  locale: Locale;
+  contact: ContactDictionary;
+}
+
+const { locale, contact } = Astro.props;
+const thanksAction = locale === "es" ? "/gracias/" : "/en/thanks/";
+---
+
+<section id="contacto" class="container max-w-4xl py-16 md:py-24">
+  <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
+    <div>
+      <div class="mb-4 h-1.5 w-9 bg-accent"></div>
+      <h2 class="mb-4 text-[clamp(1.6rem,3.4vw,2.25rem)] font-extrabold tracking-tight text-ink">
+        {contact.heading}
+      </h2>
+      <p class="mb-7 max-w-sm text-base leading-relaxed text-muted-darker">{contact.sub}</p>
+      <a
+        href={whatsappHref(locale)}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2.5 rounded-sm border border-ink px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-ink hover:text-cream"
+      >
+        {contact.whatsapp}
+      </a>
+    </div>
+
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      action={thanksAction}
+      class="flex flex-col gap-3.5"
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="language" value={locale} />
+      <p class="visually-hidden">
+        <label>
+          Do not fill this field: <input name="bot-field" tabindex="-1" autocomplete="off" />
+        </label>
+      </p>
+
+      <input
+        type="text"
+        name="name"
+        placeholder={contact.formName}
+        required
+        class="rounded-sm border border-border-strong bg-white px-4 py-3.5 text-[15px] text-ink placeholder:text-muted focus:border-accent focus:outline-none"
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder={contact.formEmail}
+        required
+        class="rounded-sm border border-border-strong bg-white px-4 py-3.5 text-[15px] text-ink placeholder:text-muted focus:border-accent focus:outline-none"
+      />
+      <select
+        name="project-type"
+        required
+        aria-label={contact.formTypeLabel}
+        class="rounded-sm border border-border-strong bg-white px-4 py-3.5 text-[15px] text-ink focus:border-accent focus:outline-none"
+      >
+        {contact.formTypes.map((opt) => (
+          <option value={opt}>{opt}</option>
+        ))}
+      </select>
+      <textarea
+        name="message"
+        rows="4"
+        placeholder={contact.formMsg}
+        required
+        class="resize-y rounded-sm border border-border-strong bg-white px-4 py-3.5 text-[15px] text-ink placeholder:text-muted focus:border-accent focus:outline-none"
+      ></textarea>
+      <button
+        type="submit"
+        class="rounded-sm bg-ink px-6 py-3.5 text-sm font-semibold text-cream transition-colors hover:bg-ink-soft"
+      >
+        {contact.formSubmit}
+      </button>
+    </form>
+  </div>
+</section>
