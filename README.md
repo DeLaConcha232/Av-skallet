@@ -25,9 +25,9 @@ pnpm lint      # ESLint
 
 El español es el idioma por defecto (`/`) y el inglés vive bajo `/en/`. Para editar el copy, se edita `src/data/es.ts` y `src/data/en.ts` — ambos están tipados contra la misma interfaz (`src/data/types.ts`), así que si un idioma le falta una clave que el otro tiene, `pnpm check`/`pnpm build` fallan.
 
-## Formulario de contacto
+## Contacto
 
-Se envía vía [Netlify Forms](https://docs.netlify.com/manage/forms/setup/) (detección automática en el HTML estático, sin backend). Las respuestas aparecen en el panel de Netlify del sitio una vez desplegado.
+No hay formulario — la sección de contacto es un CTA directo a WhatsApp (`src/data/site.ts`, función `whatsappHref`). El número y el mensaje predefinido se editan ahí.
 
 ## Precios
 

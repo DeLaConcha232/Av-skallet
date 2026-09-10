@@ -92,19 +92,6 @@ export interface ContactDictionary {
   heading: string;
   sub: string;
   whatsapp: string;
-  formName: string;
-  formEmail: string;
-  formTypeLabel: string;
-  formTypes: string[];
-  formMsg: string;
-  formSubmit: string;
-}
-
-export interface ThanksDictionary {
-  title: string;
-  heading: string;
-  text: string;
-  back: string;
 }
 
 export interface FooterDictionary {
@@ -137,7 +124,6 @@ export interface Dictionary {
   plans: PlansHeading;
   faqHeading: string;
   contact: ContactDictionary;
-  thanks: ThanksDictionary;
   footer: FooterDictionary;
   notFound: NotFoundDictionary;
 }

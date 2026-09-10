@@ -1,6 +1,6 @@
 export const site = {
   name: "av-skallet",
-  url: "https://av-skallet.com",
+  url: "https://www.avskallet.com",
   email: "avskallet@gmail.com",
   phone: "+52 449 143 1962",
   whatsappNumber: "524491431962",

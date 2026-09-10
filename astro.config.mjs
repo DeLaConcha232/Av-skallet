@@ -4,7 +4,7 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://av-skallet.com",
+  site: "https://www.avskallet.com",
   output: "static",
   integrations: [
     react(),

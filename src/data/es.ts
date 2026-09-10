@@ -98,20 +98,8 @@ export const es: Dictionary = {
   faqHeading: "Preguntas frecuentes",
   contact: {
     heading: "Hablemos de tu proyecto",
-    sub: "Cuéntanos qué necesitas. Te respondemos en menos de 24 horas para agendar una llamada breve.",
+    sub: "Cuéntanos qué necesitas por WhatsApp. Te respondemos en menos de 24 horas para agendar una llamada breve.",
     whatsapp: "Escríbenos por WhatsApp",
-    formName: "Nombre",
-    formEmail: "Correo",
-    formTypeLabel: "Tipo de proyecto",
-    formTypes: ["Landing page", "Web app (POS, reservas, pedidos, CRM)", "Ecommerce", "App móvil"],
-    formMsg: "Cuéntanos brevemente tu proyecto",
-    formSubmit: "Enviar",
-  },
-  thanks: {
-    title: "Gracias — av-skallet",
-    heading: "¡Mensaje recibido!",
-    text: "Gracias por escribirnos. Revisamos tu proyecto y te respondemos en menos de 24 horas.",
-    back: "Volver al inicio",
   },
   footer: {
     tagline: "av-skallet — Estudio de desarrollo de software",
