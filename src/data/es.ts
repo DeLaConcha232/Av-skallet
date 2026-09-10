@@ -13,6 +13,8 @@ export const es: Dictionary = {
     planes: "Planes",
     faq: "FAQ",
     cta: "Hablemos",
+    openMenu: "Abrir menú",
+    closeMenu: "Cerrar menú",
   },
   hero: {
     kicker: "Estudio de desarrollo de software",

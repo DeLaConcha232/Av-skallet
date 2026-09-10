@@ -9,6 +9,8 @@ export interface NavDictionary {
   planes: string;
   faq: string;
   cta: string;
+  openMenu: string;
+  closeMenu: string;
 }
 
 export interface HeroDictionary {

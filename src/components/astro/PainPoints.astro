@@ -17,7 +17,7 @@ const { problem } = Astro.props;
   <div class="mb-10 grid grid-cols-1 gap-7 sm:grid-cols-3">
     {problem.pains.map((pain) => (
       <div>
-        <div class="mb-2.5 font-mono text-xs text-[#b5533c]">{pain.tag}</div>
+        <div class="mb-2.5 font-mono text-xs text-accent">{pain.tag}</div>
         <p class="text-base leading-relaxed text-ink-soft">{pain.text}</p>
       </div>
     ))}

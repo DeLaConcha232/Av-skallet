@@ -12,9 +12,19 @@ interface Props {
   ctaHref: string;
   altLocaleHref: string;
   altLocaleLabel: string;
+  openMenuLabel: string;
+  closeMenuLabel: string;
 }
 
-export default function MobileNav({ navItems, ctaLabel, ctaHref, altLocaleHref, altLocaleLabel }: Props) {
+export default function MobileNav({
+  navItems,
+  ctaLabel,
+  ctaHref,
+  altLocaleHref,
+  altLocaleLabel,
+  openMenuLabel,
+  closeMenuLabel,
+}: Props) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,7 +33,7 @@ export default function MobileNav({ navItems, ctaLabel, ctaHref, altLocaleHref, 
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        aria-label={open ? "Close menu" : "Open menu"}
+        aria-label={open ? closeMenuLabel : openMenuLabel}
         className="flex items-center justify-center p-2 text-ink"
       >
         {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

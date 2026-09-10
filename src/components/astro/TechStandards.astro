@@ -1,19 +1,12 @@
 ---
 import type { TechDictionary } from "@/data/types";
+import { shapeClass } from "@/lib/shapes";
 
 interface Props {
   tech: TechDictionary;
 }
 
 const { tech } = Astro.props;
-
-const shapeClass = [
-  "rounded-none",
-  "rounded-full",
-  "rounded-none rotate-45",
-  "rounded-none [clip-path:polygon(50%_0%,0%_100%,100%_100%)]",
-  "rounded-full [clip-path:polygon(0%_0%,100%_0%,100%_100%)]",
-];
 ---
 
 <section class="container border-t border-border py-16 md:py-20">

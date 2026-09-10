@@ -1,18 +1,12 @@
 ---
 import type { ServicesDictionary } from "@/data/types";
+import { shapeClass } from "@/lib/shapes";
 
 interface Props {
   services: ServicesDictionary;
 }
 
 const { services } = Astro.props;
-
-const shapeClass = [
-  "rounded-none", // square
-  "rounded-full", // circle
-  "rounded-none rotate-45", // diamond
-  "rounded-none [clip-path:polygon(50%_0%,0%_100%,100%_100%)]", // triangle
-];
 ---
 
 <section id="servicios" class="bg-ink py-16 md:py-20">
